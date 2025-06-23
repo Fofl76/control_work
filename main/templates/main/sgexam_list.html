@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Экзамены</title>
+</head>
+<body>
+    <h1>Савиди Георгий, группа 231-321</h1>
+    <h2>Опубликованные экзамены</h2>
+    {% if exams %}
+        <ul>
+        {% for exam in exams %}
+            <li>
+                <strong>Название:</strong> {{ exam.title }}<br>
+                <strong>Дата проведения:</strong> {{ exam.exam_date|date:'d.m.Y H:i' }}<br>
+                <strong>Дата добавления:</strong> {{ exam.created_date|date:'d.m.Y H:i' }}<br>
+                {% if exam.image %}
+                    <img src="{{ exam.image.url }}" alt="Задание" style="max-width:200px;"><br>
+                {% endif %}
+                <strong>Студенты:</strong> {{ exam.students.all|join:", " }}<br>
+            </li>
+            <hr>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Нет опубликованных экзаменов.</p>
+    {% endif %}
+</body>
+</html> 
